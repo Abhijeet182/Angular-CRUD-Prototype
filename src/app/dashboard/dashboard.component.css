@@ -1,0 +1,24 @@
+.c1{
+    font-size: 30px;
+    color: blue;
+    text-align: center;
+}
+table {
+    width: 100%;
+  }
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+  /* .c2{
+    color: aliceblue;
+    background-color: blue
+  }
+  .c3{
+    color: aliceblue;
+    background-color: red
+  }
+  .c4{
+    color: aliceblue;
+    background-color: green
+  } */

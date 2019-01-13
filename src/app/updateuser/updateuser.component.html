@@ -1,0 +1,54 @@
+<div class="container">
+    <h2 class="c2">Update User</h2>
+    <button class="btn btn-outline-success"  type="button" style="float: right;"><a routerLink="/">Go Back</a></button>
+    <br>
+    <div class="jumbotron c3">
+        <form [formGroup]="updateForm" (ngSubmit)="updateuser()">
+            <div class="group">
+                <label for="user" class="label">Name</label>
+                <input type="text" formControlName="name" class="form-control" ng-model="user.name" autocomplete="off"
+                    ng-required="true" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                <div *ngIf="(submitted || f.name.touched) && f.name.errors" class="c1">
+                    <div *ngIf="f.name.errors.required">First Name is required</div>
+                    <div *ngIf="!f.name.errors.pattern && f.name.errors.minlength">Minimum 4 character</div>
+                    <div *ngIf="f.name.errors.pattern">First Name is invaild</div>
+                </div>
+            </div>
+            <div class="group">
+                <label for="user" class="label">UserName</label>
+                <input type="text" formControlName="username" class="form-control" ng-model="user.name" autocomplete="off"
+                    ng-required="true" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+                <div *ngIf="(submitted || f.username.touched) && f.username.errors" class="c1">
+                    <div *ngIf="f.username.errors.required">UserName is required</div>
+                    <div *ngIf="!f.username.errors.pattern && f.username.errors.minlength">Minimum 4 character</div>
+                    <div *ngIf="f.username.errors.pattern">UserName is invaild</div>
+                </div>
+            </div>
+            <div class="group">
+                <label for="user" class="label">Email</label>
+                <input type="text" formControlName="email" class="form-control" ng-model="user.email" autocomplete="off"
+                    ng-required="true" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                <div *ngIf="(submitted || f.email.touched) && f.email.errors" class="c1">
+                    <div *ngIf="f.email.errors.required">Email is required</div>
+                    <div *ngIf="f.email.errors.pattern">Enter vaild Email</div>
+                </div>
+            </div>
+            <div class="group">
+                <label for="user" class="label">Password</label>
+                <input type="password" formControlName="password" id="p1" class="form-control" ng-model="user.password"
+                    autocomplete="off"  ng-required="true" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                <div *ngIf="(submitted || f.password.touched) && f.password.errors" class="c1">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                    <div *ngIf="f.password.errors.pattern">Enter alpha Nummeric password</div>
+                </div>
+            </div>
+            <div class="group">
+                <label for="user" class="label">Image</label>
+                <input type="file" Name="image" class="form-control" (change)="readUrl($event)" >
+        </div>
+
+            <br>
+            <button type="submit" class="btn btn-primary">Update User</button>
+        </form>
+    </div>
+</div>

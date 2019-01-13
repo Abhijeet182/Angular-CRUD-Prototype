@@ -1,0 +1,92 @@
+<div class="container">
+    <mat-card>
+        <div class="alert alert-info">
+            <p class="c1">User Listing</p>
+        </div>
+        <button class="btn btn-outline-success" type="button"><a routerLink="/adduser">Add User</a></button>
+   <br>
+        <div class="example-container mat-elevation-z8">
+            <div class="">
+                <mat-form-field style="width: 98%;">
+                    <input matInput (keyup)="filter($event.target.value)"  [(ngModel)]= "searchKey" placeholder="Filter"><input type="button" (click)="clear()" style="float: right;"  value="X" />
+                </mat-form-field>
+            </div>
+            <div>
+                    <input [readonly] matInput   [(ngModel)]= "record">
+            </div>
+            <mat-table #Table [dataSource]="MyDataSource" matSort>
+
+                <!-- For sno -->
+                <ng-container matColumnDef="sno">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> SNO </mat-header-cell>
+                    <mat-cell *matCellDef="let post; let i = index;"> {{i+1}} </mat-cell>
+                </ng-container>
+
+                <!-- For Name -->
+                <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                    <mat-cell *matCellDef="let post"> {{post.name}} </mat-cell>
+                </ng-container>
+
+                <!-- For Username -->
+                <ng-container matColumnDef="username">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Username </mat-header-cell>
+                    <mat-cell *matCellDef="let post"> {{post.username}} </mat-cell>
+                </ng-container>
+
+                <!-- For Email -->
+                <ng-container matColumnDef="email">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+                    <mat-cell *matCellDef="let post"> {{post.email}} </mat-cell>
+                </ng-container>
+                <!-- For Timestamp -->
+                <ng-container matColumnDef="TimeStamp">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> TimeStamp </mat-header-cell>
+                    <mat-cell *matCellDef="let post"> {{post.time | date: 'dd-MMM-yyyy'}} </mat-cell>
+                </ng-container>
+                <!-- View Column -->
+                <ng-container matColumnDef="view">
+                    <mat-header-cell *matHeaderCellDef>Action </mat-header-cell>
+                    <td mat-cell *matCellDef="let post">
+                        <button class="btn-success text-center" mat-raised-button [routerLink]="['viewuser',post._id]">
+                            <mat-icon></mat-icon> View
+
+                        </button>
+                    </td>
+                </ng-container>
+                <!-- edit Column -->
+                <ng-container matColumnDef="Change">
+                    <th mat-header-cell *matHeaderCellDef> </th>
+                    <td mat-cell *matCellDef="let post">
+                        <button class="btn-primary text-center" mat-raised-button [routerLink]="['updateuser',post._id]">
+                            <mat-icon></mat-icon> Edit
+
+                        </button>
+                    </td>
+                </ng-container>
+
+                <!-- Delete Column -->
+                <ng-container matColumnDef="Delete">
+                    <th mat-header-cell *matHeaderCellDef> </th>
+                    <td mat-cell *matCellDef="let post">
+                        <button class="btn-danger text-center" mat-raised-button (click)="delete(post)">
+                            <mat-icon></mat-icon> Delete
+                        </button>
+                    </td>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+
+            <!-- To paginate between pages with search -->
+            <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
+            </mat-paginator>
+        </div>
+    </mat-card>
+    <div class="loader-block" *ngIf='loader'>
+        <svg id="loader2" viewBox="0 0 100 100">
+          <circle id="circle-loader2" cx="50" cy="50" r="45"></circle>
+        </svg>
+      </div>
+</div>
